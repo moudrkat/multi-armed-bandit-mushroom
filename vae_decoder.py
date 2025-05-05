@@ -17,7 +17,7 @@ def generate_image_from_latent(latent_vector, decoder):
     generated_image = generated_image.numpy().squeeze()  # Remove extra dimensions
 
     # Plot the generated image
-    fig, ax = plt.subplots(figsize=(0.5, 0.5))  # Create a figure and axes
+    fig, ax = plt.subplots(figsize=(1.1, 1.1))  # Create a figure and axes
     ax.imshow(generated_image, cmap='gray')  # Use appropriate color map for your images
     ax.axis('off')  # Turn off axes
     return fig  # Return the figure object

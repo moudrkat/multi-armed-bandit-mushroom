@@ -5,7 +5,8 @@ from mab import MAB
 import plotting
 from vae_decoder import load_vae_model, generate_image_from_latent
 
-st.set_page_config(layout="wide")
+
+
 st.title("The Multi-Shroomed Bandit")
 st.markdown("**Thompson Sampling in Latent Space (VAE) Simulation**")
 st.markdown("The Multi-Armed Bandit (MAB) is attempting to identify the mushroom that is most simmilar to the ideal mushroom (closest in the latent space), out of a few randomly sampled mushrooms.")
@@ -31,7 +32,7 @@ with st.expander("How the Algorithm Works & Use Case"):
 
 c1, c2 = st.columns(2)
 with c1:
-    number_of_mushrooms = st.slider("Number of arms (mushrooms)", 4, 8, 4)
+    number_of_mushrooms = st.slider("Number of arms (mushrooms)", 4, 8, 6)
 with c2:
     auto_run = st.checkbox("Run Simulation", value=False)
 
@@ -70,14 +71,13 @@ if auto_run:
                 st.pyplot(ideal_mushroom, use_container_width=False)
 
             with col2: 
-                st.markdown(f"**Latent Space Mushroom Selection Heatmap**")
-                st.pyplot(plotting.plot_latent_selection(data["true_arms"], data["chosen_arms"]))
-
-            with col3: 
                 st.markdown(f"**Tested Mushroom In Round {step_result['t']}**")
                 selected_mushroom = generate_image_from_latent(step_result['arm_vector'], generator)
                 st.pyplot(selected_mushroom, use_container_width=False)
 
+            with col3: 
+                st.markdown(f"**Selection Heatmap**")
+                st.pyplot(plotting.plot_latent_selection(data["true_arms"], data["chosen_arms"]))
 
             st.markdown("**Updated Distributions (Beta) of Mushroom Success Probabilities**")
             st.pyplot(plotting.plot_posteriors(data["alpha"], data["beta_vals"]))  
@@ -85,7 +85,6 @@ if auto_run:
             st.markdown("**Learning Curve**")    
             st.pyplot(plotting.plot_learning_curve(data["cumulative_rewards"]))
                 
-
         if not auto_run:
             break
         time.sleep(interval)

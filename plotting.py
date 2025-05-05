@@ -33,21 +33,21 @@ def plot_latent_selection(true_arms, chosen_arms):
     xs = [vec[0] for vec in true_arms]
     ys = [vec[1] for vec in true_arms]
 
-    fig, ax = plt.subplots()
-    sc = ax.scatter(xs, ys, c=selection_counts, cmap='plasma', s=150, edgecolors='black')
+    fig, ax = plt.subplots(figsize=(6, 6))
+    sc = ax.scatter(xs, ys, c=selection_counts, cmap='plasma', s=500, edgecolors='black')
     fig.colorbar(sc, ax=ax, label='Selection Count')
 
     # Mark the ideal latent vector at (0, 0)
-    ax.scatter(0, 0, color='white', edgecolor='white', s=200, marker='x', linewidths=4, label='Ideal Mushroom')
+    ax.scatter(0, 0, color='white', edgecolor='white', s=500, marker='x', linewidths=4, label='Ideal Mushroom')
 
     # Highlight the most recently chosen arm
     last_chosen_idx = chosen_arms[-1]
     last_x, last_y = true_arms[last_chosen_idx]
-    ax.scatter(last_x, last_y, s=300, color='none', edgecolors='white', linewidths=4, marker='o', label='Selected Mushroom', zorder=5)
+    ax.scatter(last_x, last_y, s=500, color='none', edgecolors='white', linewidths=4, marker='o', label='Selected Mushroom', zorder=5)
 
     # Add labels for each arm (mushroom)
     for i, (x, y) in enumerate(zip(xs, ys)):
-        ax.text(x, y, f'{i+1}', color='black', fontsize=8, ha='center', va='center', fontweight='bold')
+        ax.text(x, y, f'{i+1}', color='black', fontsize=20, ha='center', va='center', fontweight='bold')
 
     ax.set_xlim(-3, 3)
     ax.set_ylim(-3, 3)
