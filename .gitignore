@@ -1,0 +1,4 @@
+*.png
+MAB_thompson.py
+trained_encoder*
+*__pycache__*
