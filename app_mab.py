@@ -62,23 +62,18 @@ if auto_run:
         with placeholder.container():
             st.subheader(f"Round {step_result['t']}")
 
-            col1, col2, col3, col4 = st.columns(4)
+            col1, col2, col3 = st.columns(3)
             with col1:
                 
                 st.markdown("**Ideal Mushroom**")
                 ideal_mushroom = generate_image_from_latent([0,0], generator)
                 st.pyplot(ideal_mushroom, use_container_width=False)
 
-            with col2:
-                st.markdown(f"**Closest To Ideal Mushroom As Of Round {step_result['t']}**")
-                ideal_mushroom = generate_image_from_latent([0,0], generator)
-                st.pyplot(ideal_mushroom, use_container_width=False)
-
-            with col3: 
+            with col2: 
                 st.markdown(f"**Latent Space Mushroom Selection Heatmap**")
                 st.pyplot(plotting.plot_latent_selection(data["true_arms"], data["chosen_arms"]))
 
-            with col4: 
+            with col3: 
                 st.markdown(f"**Tested Mushroom In Round {step_result['t']}**")
                 selected_mushroom = generate_image_from_latent(step_result['arm_vector'], generator)
                 st.pyplot(selected_mushroom, use_container_width=False)
