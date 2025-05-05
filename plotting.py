@@ -22,10 +22,8 @@ def plot_learning_curve(cumulative_rewards, max_steps=500):
     fig, ax = plt.subplots(figsize=(10, 2.5))  # Wide and short
     ax.plot(cumulative_rewards, label='Cumulative Avg Reward', color='white', linewidth=2)
     ax.set_xlim(0, max_steps)
-    # ax.set_title("Learning Curve", fontsize=12)
     ax.set_xlabel("Round")
     ax.set_ylabel("Average Reward")
-    # ax.grid(True)
     ax.legend()
     plt.tight_layout()
     return fig
@@ -53,7 +51,6 @@ def plot_latent_selection(true_arms, chosen_arms):
 
     ax.set_xlim(-3, 3)
     ax.set_ylim(-3, 3)
-    # ax.set_title("Latent Space Selection Heatmap", fontsize=14)
     ax.set_xlabel("z1", fontsize=12)
     ax.set_ylabel("z2", fontsize=12)
     ax.grid(True)
@@ -93,7 +90,6 @@ def plot_posteriors(alpha, beta_vals):
         ax.set_title(f"Mushroom {i+1}")
         ax.set_xlabel("p (success probability)")
         ax.set_ylabel("Density")
-        # ax.grid(True)
         ax.legend(fontsize=8)
 
     plt.tight_layout(rect=[0, 0.03, 1, 0.95])

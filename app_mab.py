@@ -10,12 +10,28 @@ st.title("The Multi-Shroomed Bandit")
 st.markdown("**Thompson Sampling in Latent Space (VAE) Simulation**")
 st.markdown("The Multi-Armed Bandit (MAB) is attempting to identify the mushroom that is most simmilar to the ideal mushroom (closest in the latent space), out of a few randomly sampled mushrooms.")
 
+with st.expander("How the Algorithm Works & Use Case"):
+    st.markdown("""
+    ##### How the Algorithm Works
+    - This app simulates a **multi-armed bandit problem** using **Thompson Sampling**.
+    - Each "arm" is a **mushroom image**, represented by a point in a 2D **latent space**.
+    - The **closer an image is to the center (0.0)**, the higher its chance of getting a "click".
+    - Thompson Sampling keeps a **Beta distribution for each image** and:
+      - Samples from each distribution.
+      - Chooses the image with the highest sampled value.
+      - Updates distributions based on success (click) or failure (no click).
+    - Over time, the algorithm **learns which image performs best**, while still exploring alternatives.
+
+    ##### Use Case for This Streamlit App
+    - Demonstrates how **AI can optimize ad content selection in real time**.
+    - Simulates a marketing scenario where you want to **maximize CTR** by showing the most appealing image.
+    - Shows how bandit algorithms can **reduce wasted impressions** compared to standard A/B testing.
+    - A fun and visual way to understand **reinforcement learning in practice**.
+    """)
+
 c1, c2 = st.columns(2)
 with c1:
     number_of_mushrooms = st.slider("Number of arms (mushrooms)", 4, 8, 4)
-# with c2:
-#     # Control simulation
-#     run_sim = st.button("Run Next Step")
 with c2:
     auto_run = st.checkbox("Run Simulation", value=False)
 
@@ -34,7 +50,6 @@ if 'generator'not in st.session_state:
 
 generator = st.session_state.generator
  
-# interval = st.slider("Time Interval (sec)", 0.1, 2.0, 0.5)
 interval = 0.005
 
 if auto_run:
@@ -69,7 +84,7 @@ if auto_run:
                 st.pyplot(selected_mushroom, use_container_width=False)
 
 
-            st.markdown("**Posterior Distributions (Beta) of Mushroom Success Probabilities**")
+            st.markdown("**Updated Distributions (Beta) of Mushroom Success Probabilities**")
             st.pyplot(plotting.plot_posteriors(data["alpha"], data["beta_vals"]))  
 
             st.markdown("**Learning Curve**")    
