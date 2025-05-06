@@ -33,7 +33,7 @@ def plot_latent_selection(true_arms, chosen_arms):
     xs = [vec[0] for vec in true_arms]
     ys = [vec[1] for vec in true_arms]
 
-    fig, ax = plt.subplots(figsize=(6.5, 6.5))
+    fig, ax = plt.subplots(figsize=(5, 5))
     sc = ax.scatter(xs, ys, c=selection_counts, cmap='plasma', s=500, edgecolors='black')
     fig.colorbar(sc, ax=ax, label='Selection Count')
 
