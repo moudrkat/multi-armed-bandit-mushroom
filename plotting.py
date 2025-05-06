@@ -33,7 +33,7 @@ def plot_latent_selection(true_arms, chosen_arms):
     xs = [vec[0] for vec in true_arms]
     ys = [vec[1] for vec in true_arms]
 
-    fig, ax = plt.subplots(figsize=(6, 6))
+    fig, ax = plt.subplots(figsize=(6.5, 6.5))
     sc = ax.scatter(xs, ys, c=selection_counts, cmap='plasma', s=500, edgecolors='black')
     fig.colorbar(sc, ax=ax, label='Selection Count')
 
@@ -54,7 +54,7 @@ def plot_latent_selection(true_arms, chosen_arms):
     ax.set_xlabel("z1", fontsize=12)
     ax.set_ylabel("z2", fontsize=12)
     ax.grid(True)
-    ax.legend()
+    ax.legend(labelspacing=1.0, markerscale=0.5) 
     return fig
 
 def plot_reward_distributions(rewards_per_arm):
@@ -68,29 +68,36 @@ def plot_reward_distributions(rewards_per_arm):
     ax.grid(True)
     return fig
 
-def plot_posteriors(alpha, beta_vals):
+def plot_posteriors(alpha, beta_vals, chosen_arms):
     n_arms = len(alpha)
-    cols = n_arms  # One column per arm
+    cols = n_arms
     rows = 1
 
     fig, axs = plt.subplots(rows, cols, figsize=(4 * cols, 5))
-    # fig.suptitle("Posterior Distributions (Beta) of Mushroom Success Probabilities", fontsize=14)
 
-    # Ensure axs is iterable (e.g. even if n_arms == 1)
+    # Ensure axs is iterable
     if n_arms == 1:
         axs = [axs]
 
     x = np.linspace(0, 1, 500)
+    last_chosen_idx = chosen_arms[-1]  # Index of last chosen arm
 
     for i in range(n_arms):
         ax = axs[i]
         a, b = alpha[i], beta_vals[i]
         y = beta_dist.pdf(x, a, b)
+
         ax.plot(x, y, label=f'Beta({int(a)}, {int(b)})', color='white', linewidth=3)
         ax.set_title(f"Mushroom {i+1}")
         ax.set_xlabel("p (success probability)")
         ax.set_ylabel("Density")
         ax.legend(fontsize=8)
+
+        # Highlight border if this is the last chosen arm
+        if i == last_chosen_idx:
+            for spine in ax.spines.values():
+                spine.set_edgecolor('white')  # or 'red', etc.
+                spine.set_linewidth(6)
 
     plt.tight_layout(rect=[0, 0.03, 1, 0.95])
     return fig
