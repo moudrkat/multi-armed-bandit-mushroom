@@ -10,7 +10,7 @@ from vae_decoder import load_vae_model, generate_image_from_latent
 st.title("The Multi-Shroomed Bandit")
 st.markdown("**Thompson Sampling in Latent Space (VAE) Simulation**")
 
-st.markdown("The algorithm is attempting to identify the mushroom that is most similar to the ideal one, out of a few randomly sampled mushrooms.")
+st.markdown("The algorithm aims to identify the mushroom most similar to the ideal one among a set of randomly sampled candidates.")
 
 with st.expander("How the Algorithm Works"):
     st.markdown("""
