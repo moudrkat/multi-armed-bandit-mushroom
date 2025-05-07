@@ -89,7 +89,7 @@ def plot_posteriors(alpha, beta_vals, chosen_arms):
 
         ax.plot(x, y, label=f'Beta({int(a)}, {int(b)})', color='white', linewidth=3)
         ax.set_title(f"Mushroom {i+1}")
-        ax.set_xlabel("p (success probability)")
+        # ax.set_xlabel("p (success probability)")
         ax.set_ylabel("Density")
         ax.legend(fontsize=8)
 
